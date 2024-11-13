@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Controllers.Core;
 using Core.Main;
@@ -21,6 +22,12 @@ namespace Core.Managers
         {
             get => Instance.saveData.Language;
             set => Instance.saveData.Language = value;
+        }
+        
+        public static List<string> Operations
+        {
+            get => Instance.saveData.Operations;
+            set => Instance.saveData.Operations = value;
         }
         
         protected override void AfterAwake()

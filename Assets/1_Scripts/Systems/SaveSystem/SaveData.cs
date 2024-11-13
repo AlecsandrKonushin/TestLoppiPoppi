@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core.Main;
 
 namespace SaveSystem
@@ -7,5 +8,6 @@ namespace SaveSystem
     public class SaveData
     {
         public TypeLanguage Language;
+        public List<string> Operations;
     }
 }

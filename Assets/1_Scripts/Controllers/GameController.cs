@@ -1,4 +1,8 @@
+using System.Collections.Generic;
 using Controllers.Core;
+using Core.Main;
+using Core.Managers;
+using UI.Windows;
 using UnityEngine;
 
 namespace Controllers
@@ -6,9 +10,58 @@ namespace Controllers
     [CreateAssetMenu(fileName = "GameController", menuName = "Controllers/GameController")]
     public class GameController : Controller
     {
+        private List<string> operations;
+
+        public override void OnStart()
+        {
+            if (LoadSaveManager.IsHaveSave)
+            {
+                operations = LoadSaveManager.Operations;
+            }
+            else
+            {
+                operations = new List<string>();
+            }
+        }
+
         public void StartGameScene()
         {
+            ShowCalculatorWindow();
+        }
+
+        public void SuccessOperation(string operation)
+        {
+            SaveOperation(operation);
+            ShowCalculatorWindow();
+        }
+
+        public void FailedOperation(string operation)
+        {
+            SaveOperation(operation);
+
+            UIManager.HideWindow<CalculatorWindow>();
+            UIManager.GetWindow<ErrorWindow>().SetErrorMessage(Localizator.GetTextUI("ErrorMessage"));
+            UIManager.ShowWindow<ErrorWindow>();
+        }
+
+        public void CloseErrorWindow()
+        {
+            UIManager.HideWindow<ErrorWindow>();
             
+            ShowCalculatorWindow();
+        }
+
+        private void ShowCalculatorWindow()
+        {
+            UIManager.GetWindow<CalculatorWindow>().SetOperations(operations);
+            UIManager.ShowWindow<CalculatorWindow>();
+        }
+
+        private void SaveOperation(string operation)
+        {
+            operations.Add(operation);
+            LoadSaveManager.Operations = operations;
+            LoadSaveManager.Save();
         }
     }
 }

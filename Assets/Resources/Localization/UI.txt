@@ -1,1 +1,6 @@
 Result;Результат;Result
+DefaultEquation;Введите уравнение...;Enter an equation...;
+CalculatorPro;CALCULATOR PRO;CALCULATOR PRO
+Error;ОШИБКА;ERROR
+ErrorMessage;Пожалуйста, проверьте выражение, которое вы только что ввели.;Please cheak the expression yor just entered
+GotIt;Понятно;Got it
