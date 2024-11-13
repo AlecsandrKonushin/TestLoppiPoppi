@@ -17,19 +17,25 @@ namespace Core.Managers
         public static bool IsHaveSave;
 
         private SaveData saveData;
-        
+
         public static TypeLanguage Language
         {
             get => Instance.saveData.Language;
             set => Instance.saveData.Language = value;
         }
-        
+
+        public static string LastInput
+        {
+            get => Instance.saveData.LastInput;
+            set => Instance.saveData.LastInput = value;
+        }
+
         public static List<string> Operations
         {
             get => Instance.saveData.Operations;
             set => Instance.saveData.Operations = value;
         }
-        
+
         protected override void AfterAwake()
         {
             OnLoad = new UnityEvent();

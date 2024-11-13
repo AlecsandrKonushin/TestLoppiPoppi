@@ -26,7 +26,14 @@ namespace Controllers
 
         public void StartGameScene()
         {
+            UIManager.GetWindow<CalculatorWindow>().SetLastInput(LoadSaveManager.LastInput);
             ShowCalculatorWindow();
+        }
+
+        public void ChangeInput(string input)
+        {
+            LoadSaveManager.LastInput = input;
+            LoadSaveManager.Save();
         }
 
         public void SuccessOperation(string operation)
@@ -47,13 +54,15 @@ namespace Controllers
         public void CloseErrorWindow()
         {
             UIManager.HideWindow<ErrorWindow>();
-            
+
             ShowCalculatorWindow();
         }
 
         private void ShowCalculatorWindow()
         {
-            UIManager.GetWindow<CalculatorWindow>().SetOperations(operations);
+            List<string> reverseOperations = new List<string>(operations);
+            reverseOperations.Reverse();
+            UIManager.GetWindow<CalculatorWindow>().SetOperations(reverseOperations);
             UIManager.ShowWindow<CalculatorWindow>();
         }
 
@@ -61,6 +70,7 @@ namespace Controllers
         {
             operations.Add(operation);
             LoadSaveManager.Operations = operations;
+            LoadSaveManager.LastInput = "";
             LoadSaveManager.Save();
         }
     }

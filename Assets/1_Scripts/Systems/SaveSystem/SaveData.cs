@@ -8,6 +8,7 @@ namespace SaveSystem
     public class SaveData
     {
         public TypeLanguage Language;
+        public string LastInput;
         public List<string> Operations;
     }
 }

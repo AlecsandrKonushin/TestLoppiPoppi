@@ -5,6 +5,7 @@ using Core.Main;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using GameController = Controllers.GameController;
 
 namespace UI.Windows
 {
@@ -20,8 +21,16 @@ namespace UI.Windows
             nameText.text = Localizator.GetTextUI("CalculatorPro");
             resultButton.GetComponentInChildren<TextMeshProUGUI>().text = Localizator.GetTextUI("Result");
             resultButton.onClick.AddListener(ClickResultButton);
+            equationInputField.onValueChanged.AddListener((string text) =>
+                BoxControllers.GetController<GameController>().ChangeInput(text));
+            historyScroll.Init();
 
             ResetInputField();
+        }
+
+        public void SetLastInput(string lastInput)
+        {
+            equationInputField.text = lastInput;
         }
 
         public void SetOperations(List<string> operations)
